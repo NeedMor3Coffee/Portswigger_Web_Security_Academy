@@ -42,5 +42,16 @@ Kết quả cho ra truy vấn SQL như sau:
 ````bash
 SELECT * FROM products WHERE category = 'Gifts'--' AND released = 1
 ````
+Quan trọng, lưu ý rằng đó -- là một chỉ báo chú thích trong SQL. Điều này có nghĩa là phần còn lại của truy vấn được hiểu là một chú thích, về cơ bản là xóa nó. Trong ví dụ này, điều này có nghĩa là truy vấn không còn bao gồm AND released = 1. Kết quả là, tất cả các sản phẩm đều được hiển thị, bao gồm cả những sản phẩm chưa được phát hành.
 
+Bạn có thể sử dụng một cuộc tấn công tương tự để khiến ứng dụng hiển thị tất cả các sản phẩm trong bất kỳ danh mục nào, bao gồm cả những danh mục mà ứng dụng không biết:
+````bash
+https://insecure-website.com/products?category=Gifts'+OR+1=1--
+````
+Kết quả cho ra truy vấn SQL như sau:
+
+````bash
+SELECT * FROM products WHERE category = 'Gifts' OR 1=1--' AND released = 1
+````
+Truy vấn đã sửa đổi trả về tất cả các mục có giá trị là category, Giftshoặc 1bằng 1. Như 1=1luôn đúng, truy vấn trả về tất cả các mục.
 
