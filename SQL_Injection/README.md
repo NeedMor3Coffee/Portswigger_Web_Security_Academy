@@ -23,3 +23,15 @@ Tuy nhiên, lỗ hổng SQL injection có thể xảy ra ở bất kỳ vị tr�
 * Trong các câu lệnh INSERT, bên trong các giá trị được chèn vào.<br>
 * Trong các câu lệnh SELECT, bên trong tên bảng hoặc cột.<br>
 * Trong các câu lệnh SELECT, trong mệnh đề ORDER BY.<br>
+
+# Lấy dữ liệu ẩn
+Hãy tưởng tượng một ứng dụng mua sắm hiển thị sản phẩm theo các danh mục khác nhau. Khi người dùng nhấp vào danh mục Quà tặng , trình duyệt của họ yêu cầu URL:
+````bash
+https://insecure-website.com/products?category=Gifts
+````
+
+Điều này khiến ứng dụng thực hiện truy vấn SQL để lấy thông tin chi tiết về các sản phẩm có liên quan từ cơ sở dữ liệu:
+````bash
+SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+````
+
