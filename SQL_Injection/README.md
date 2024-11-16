@@ -34,4 +34,13 @@ https://insecure-website.com/products?category=Gifts
 ````bash
 SELECT * FROM products WHERE category = 'Gifts' AND released = 1
 ````
+Ứng dụng không triển khai bất kỳ biện pháp phòng thủ nào chống lại các cuộc tấn công SQL injection. Điều này có nghĩa là kẻ tấn công có thể xây dựng các cuộc tấn công sau, ví dụ:
+````bash
+https://insecure-website.com/products?category=Gifts'--
+````
+Kết quả cho ra truy vấn SQL như sau:
+````bash
+SELECT * FROM products WHERE category = 'Gifts'--' AND released = 1
+````
+
 
