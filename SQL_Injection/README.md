@@ -53,5 +53,5 @@ Kết quả cho ra truy vấn SQL như sau:
 ````bash
 SELECT * FROM products WHERE category = 'Gifts' OR 1=1--' AND released = 1
 ````
-Truy vấn đã sửa đổi trả về tất cả các mục có giá trị là category, Giftshoặc 1bằng 1. Như 1=1luôn đúng, truy vấn trả về tất cả các mục.
+Truy vấn đã sửa đổi trả về tất cả các mục có giá trị là category, Gifts hoặc 1 bằng 1. Như 1=1 luôn đúng, truy vấn trả về tất cả các mục.
 
