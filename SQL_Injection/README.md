@@ -63,7 +63,7 @@ SELECT * FROM users WHERE username = 'wiener' AND password = 'bluecheese'
 ````
 Nếu truy vấn trả về thông tin chi tiết của người dùng thì đăng nhập thành công. Nếu không, đăng nhập sẽ bị từ chối.
 
-Trong trường hợp này, kẻ tấn công có thể đăng nhập với tư cách là bất kỳ người dùng nào mà không cần mật khẩu. Họ có thể thực hiện việc này bằng cách sử dụng chuỗi chú thích SQL --để xóa kiểm tra mật khẩu khỏi mệnh đề WHERE của truy vấn. Ví dụ, gửi tên người dùng administrator'-- và mật khẩu trống sẽ dẫn đến truy vấn sau:
+Trong trường hợp này, kẻ tấn công có thể đăng nhập với tư cách là bất kỳ người dùng nào mà không cần mật khẩu. Họ có thể thực hiện việc này bằng cách sử dụng chuỗi chú thích SQL -- để xóa kiểm tra mật khẩu khỏi mệnh đề WHERE của truy vấn. Ví dụ, gửi tên người dùng administrator'-- và mật khẩu trống sẽ dẫn đến truy vấn sau:
 ````bash
 SELECT * FROM users WHERE username = 'administrator'--' AND password = 'bluecheese'
 ````
