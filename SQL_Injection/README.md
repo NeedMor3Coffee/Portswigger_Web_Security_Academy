@@ -55,3 +55,11 @@ SELECT * FROM products WHERE category = 'Gifts' OR 1=1--' AND released = 1
 ````
 Truy vấn đã sửa đổi trả về tất cả các mục có giá trị là category, Gifts hoặc 1 bằng 1. Như 1=1 luôn đúng, truy vấn trả về tất cả các mục.
 
+# Lật đổ logic ứng dụng
+
+Hãy tưởng tượng một ứng dụng cho phép người dùng đăng nhập bằng tên người dùng và mật khẩu. Nếu người dùng gửi tên người dùng wiener và mật khẩu bluecheese, ứng dụng sẽ kiểm tra thông tin xác thực bằng cách thực hiện truy vấn SQL sau:
+````bash
+SELECT * FROM users WHERE username = 'wiener' AND password = 'bluecheese'
+````
+
+
