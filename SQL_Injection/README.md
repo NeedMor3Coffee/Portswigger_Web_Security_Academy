@@ -65,5 +65,8 @@ Nếu truy vấn trả về thông tin chi tiết của người dùng thì đă
 
 Trong trường hợp này, kẻ tấn công có thể đăng nhập với tư cách là bất kỳ người dùng nào mà không cần mật khẩu. Họ có thể thực hiện việc này bằng cách sử dụng chuỗi chú thích SQL -- để xóa kiểm tra mật khẩu khỏi mệnh đề WHERE của truy vấn. Ví dụ, gửi tên người dùng administrator'-- và mật khẩu trống sẽ dẫn đến truy vấn sau:
 ````bash
-SELECT * FROM users WHERE username = 'administrator'--' AND password = 'bluecheese'
+SELECT * FROM users WHERE username = 'administrator'--' AND password = ''
 ````
+username truy vấn này trả về tên người dùng administrator và ghi nhận thành công kẻ tấn công vào tài khoản người dùng đó.
+
+
