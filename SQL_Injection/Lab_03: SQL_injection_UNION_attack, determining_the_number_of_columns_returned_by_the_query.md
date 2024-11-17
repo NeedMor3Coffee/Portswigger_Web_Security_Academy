@@ -5,3 +5,6 @@ Trong thử thách này chứa lỗ hổng SQL injection trong bộ lọc danh m
 
 # Phân tích và giải quyết
 
+![image](https://github.com/user-attachments/assets/8d116b54-789d-4c03-8f1b-d0d6fe78ab85)
+
+
