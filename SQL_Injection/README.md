@@ -88,6 +88,49 @@ Truy vấn SQL này trả về một tập kết quả duy nhất với hai cộ
 * Có bao nhiêu cột được trả về từ truy vấn ban đầu.
 * Những cột nào được trả về từ truy vấn gốc có kiểu dữ liệu phù hợp để lưu trữ kết quả từ truy vấn được đưa vào.
 
+# Xác định số lượng cột cần thiết
+Khi bạn thực hiện tấn công SQL injection UNION, có hai phương pháp hiệu quả để xác định có bao nhiêu cột được trả về từ truy vấn gốc.
+
+Một phương pháp bao gồm việc chèn một loạt các mệnh đề ORDER BY và tăng chỉ số cột được chỉ định cho đến khi xảy ra lỗi. Ví dụ, nếu điểm chèn là một chuỗi được trích dẫn trong mệnh đề WHERE của truy vấn gốc, bạn sẽ gửi:
+````bash
+' ORDER BY 1--
+' ORDER BY 2--
+' ORDER BY 3--
+etc.
+````
+Chuỗi tải trọng này sửa đổi truy vấn gốc để sắp xếp kết quả theo các cột khác nhau trong tập kết quả. Cột trong mệnh đề ORDER BY có thể được chỉ định theo chỉ mục của nó, do đó bạn không cần biết tên của bất kỳ cột nào. Khi chỉ mục cột được chỉ định vượt quá số lượng cột thực tế trong tập kết quả, cơ sở dữ liệu trả về lỗi, chẳng hạn như:
+````bash
+The ORDER BY position number 3 is out of range of the number of items in the select list.
+````
+Ứng dụng có thể thực sự trả về lỗi cơ sở dữ liệu trong phản hồi HTTP của nó, nhưng nó cũng có thể đưa ra phản hồi lỗi chung. Trong những trường hợp khác, nó có thể chỉ trả về không có kết quả nào cả. Dù bằng cách nào, miễn là bạn có thể phát hiện ra một số khác biệt trong phản hồi, bạn có thể suy ra có bao nhiêu cột đang được trả về từ truy vấn.
+
+Phương pháp thứ hai bao gồm việc gửi một loạt UNION SELECTcác dữ liệu chỉ định số lượng giá trị null khác nhau:
+````bash
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+etc.
+````
+Nếu số lượng giá trị null không khớp với số lượng cột, cơ sở dữ liệu sẽ trả về lỗi, chẳng hạn như:
+````bash
+All queries combined using a UNION, INTERSECT or EXCEPT operator must have an equal number of expressions in their target lists.
+````
+Chúng tôi sử dụng NULL làm giá trị được trả về từ truy vấn SELECT được chèn vì các kiểu dữ liệu trong mỗi cột phải tương thích giữa truy vấn gốc và truy vấn được chèn. NULL có thể chuyển đổi thành mọi loại dữ liệu phổ biến, do đó, nó tối đa hóa khả năng tải trọng sẽ thành công khi số cột chính xác.
+
+Tương tự như kỹ thuật ORDER BY , ứng dụng có thể thực sự trả về lỗi cơ sở dữ liệu trong phản hồi HTTP của nó, nhưng có thể trả về lỗi chung hoặc đơn giản là không trả về kết quả nào. Khi số lượng giá trị null khớp với số lượng cột, cơ sở dữ liệu trả về một hàng bổ sung trong tập kết quả, chứa các giá trị null trong mỗi cột. Hiệu ứng đối với phản hồi HTTP phụ thuộc vào mã của ứng dụng. Nếu may mắn, bạn sẽ thấy một số nội dung bổ sung trong phản hồi, chẳng hạn như một hàng bổ sung trên bảng HTML. Nếu không, các giá trị null có thể kích hoạt một lỗi khác, chẳng hạn như NullPointerException. Trong trường hợp xấu nhất, phản hồi có thể trông giống như phản hồi do số lượng giá trị null không chính xác. Điều này sẽ khiến phương pháp này không hiệu quả.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
