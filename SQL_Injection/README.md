@@ -69,4 +69,25 @@ SELECT * FROM users WHERE username = 'administrator'--' AND password = ''
 ````
 username truy vấn này trả về tên người dùng administrator và ghi nhận thành công kẻ tấn công vào tài khoản người dùng đó.
 
+# Tấn công SQL Injection bằng UNION
+Khi một ứng dụng dễ bị SQL injection và kết quả của truy vấn được trả về trong phản hồi của ứng dụng, bạn có thể sử dụng từ khóa UNION để truy xuất dữ liệu từ các bảng khác trong cơ sở dữ liệu. Điều này thường được gọi là tấn công SQL injection UNION.
+
+Từ khóa UNION cho phép bạn thực hiện một hoặc nhiều truy vấn SELECT bổ sung và thêm kết quả vào truy vấn ban đầu. Ví dụ:
+````bash
+SELECT a, b FROM table1 UNION SELECT c, d FROM table2
+````
+Truy vấn SQL này trả về một tập kết quả duy nhất với hai cột, chứa các giá trị từ các cột a và b trong table1 và các cột c và d trong table2.
+
+Để truy vấn UNION có hiệu quả, hai yêu cầu chính phải được đáp ứng:
+
+* Các truy vấn riêng lẻ phải trả về cùng số cột.
+* Các kiểu dữ liệu trong mỗi cột phải tương thích giữa các truy vấn riêng lẻ.
+
+Để thực hiện một cuộc tấn công SQL injection UNION, hãy đảm bảo rằng cuộc tấn công của bạn đáp ứng được hai yêu cầu sau. Điều này thường liên quan đến việc tìm hiểu:
+
+* Có bao nhiêu cột được trả về từ truy vấn ban đầu.
+* Những cột nào được trả về từ truy vấn gốc có kiểu dữ liệu phù hợp để lưu trữ kết quả từ truy vấn được đưa vào.
+
+
+
 
