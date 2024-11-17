@@ -96,7 +96,6 @@ Một phương pháp bao gồm việc chèn một loạt các mệnh đề ORDER
 ' ORDER BY 1--
 ' ORDER BY 2--
 ' ORDER BY 3--
-etc.
 ````
 Chuỗi tải trọng này sửa đổi truy vấn gốc để sắp xếp kết quả theo các cột khác nhau trong tập kết quả. Cột trong mệnh đề ORDER BY có thể được chỉ định theo chỉ mục của nó, do đó bạn không cần biết tên của bất kỳ cột nào. Khi chỉ mục cột được chỉ định vượt quá số lượng cột thực tế trong tập kết quả, cơ sở dữ liệu trả về lỗi, chẳng hạn như:
 ````bash
@@ -109,7 +108,6 @@ Phương pháp thứ hai bao gồm việc gửi một loạt UNION SELECTcác d�
 ' UNION SELECT NULL--
 ' UNION SELECT NULL,NULL--
 ' UNION SELECT NULL,NULL,NULL--
-etc.
 ````
 Nếu số lượng giá trị null không khớp với số lượng cột, cơ sở dữ liệu sẽ trả về lỗi, chẳng hạn như:
 ````bash
