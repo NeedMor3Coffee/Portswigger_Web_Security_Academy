@@ -103,7 +103,7 @@ The ORDER BY position number 3 is out of range of the number of items in the sel
 ````
 Ứng dụng có thể thực sự trả về lỗi cơ sở dữ liệu trong phản hồi HTTP của nó, nhưng nó cũng có thể đưa ra phản hồi lỗi chung. Trong những trường hợp khác, nó có thể chỉ trả về không có kết quả nào cả. Dù bằng cách nào, miễn là bạn có thể phát hiện ra một số khác biệt trong phản hồi, bạn có thể suy ra có bao nhiêu cột đang được trả về từ truy vấn.
 
-Phương pháp thứ hai bao gồm việc gửi một loạt UNION SELECTcác dữ liệu chỉ định số lượng giá trị null khác nhau:
+Phương pháp thứ hai bao gồm việc gửi một loạt UNION SELECT các dữ liệu chỉ định số lượng giá trị null khác nhau:
 ````bash
 ' UNION SELECT NULL--
 ' UNION SELECT NULL,NULL--
